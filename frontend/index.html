@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Input Form</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="GTableContainer"></div>
+    <div id="Options-Screen">
+        <h1>Hello Your'e in System Please Pick Your Desigred Page:</h1>
+        <button onclick="Grades_page()" id="Grade-T-Btn" class="s-btn">לוח ציונים</button>
+        <button onclick="Avg_page()" id="Avg-Grade-Btn" class="s-btn">לוח ממומצע לכל ציון</button>
+        <button onclick="TimeTable_page()" id="T-T-Btn" class="s-btn">מערכת שעות</button>
+        <button onclick="Behavior_page()" id="B-Btn" class="s-btn">הערות התנהגות </button>
+    </div>
+    <div id="BehaivorContainer"></div>
+
+    <div id="Start-Screen">
+        <div id="Login-div">
+            <h1>Mashov Data Fetcher</h1>
+            <h1>Meathod 1.</h1>
+            <form  action="/submit-file" id="file-upload-form" method="POST">
+                <label for="fileInput">Upload the JSON file:</label>
+                <input type="file" id="file-input" name="file-input" accept=".json" required>
+                <button type="submit" class="s-btn" style="height: 200px; width: 200px; font-size: 20px; background-color: red;">Upload</button>
+            </form>
+            <form action="/submit" method="POST" id="inp-upload-form">
+                <h1>Meathod 2.</h1>
+                <label for="isreal-id-inp">Username:</label>
+                <input type="text" id="isreal-id-inp" name="isreal-id-inp" required>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <label for="SEMEL">Semel: </label>
+                <input type="text" id="SEMEL" name="SEMEL" required>
+                <label for="YEAR">Year: </label>
+                <input type="text" id="YEAR" name="YEAR" required>
+                <input type="submit" value="Submit">
+            </form>
+            <div id="response"></div>
+        </div>
+        <div id="Info-div">
+            <h1>Welcome to Mashov Data Fetcher</h1>
+            
+            <p>This tool allows you to easily fetch data from the Mashov website and display it in a user-friendly format. </p>
+            <h2>There are two meathods for login:</h2>
+            <h1>1.</h1>
+            <p>Simply upload a JSON file containing the input data specified, and the tool will do the rest.</p>
+            <pre>Here Is what the JSON file should look like:
+                {
+                    "SEMEL": "XXXXXX", 
+                    "YEAR": "the year you want the data of e.g 2024",
+                    "ID": "XXXXXX",
+                    "PASSWORD": "XXXXXX"
+                }
+            </pre>            
+            <p>To download this format click <a href="/Assets/input_file_for_mashov_Struc.json" download>Here</a></p>
+            <h1>2.</h1>
+            <p>Enter your <b>SEMEL</b> , <b>ID</b>,The <b>YEAR</b> of wanted data, and Your <b>Password</b> and the tool will automatically fetch the data for you.</p>
+            <h3>If You Dont Know Your PASSWORD/ID Ask Your Teacher/School admin for help.</h3>
+            <h3>
+                Heres how to get the "SEMEL" type your school name (in hebrew) and  Just Click it. <br> Type Here Your School Name: <br>
+                <div class="search-container">
+                    <input type="text" id="searchInput" placeholder="חפש...">
+                    <div id="dataList"></div>
+                </div>
+            </h3>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

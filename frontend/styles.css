@@ -1,0 +1,116 @@
+#Info-div{
+    font-size: 1.5em;
+}
+
+.s-btn {
+    width: 300px;
+    height: 300px;
+    margin: 20px;
+    color: #ffffff;
+    border: none;
+    border-radius: 50%;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 100px; /* Vertically center text */
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+.grade-label {
+    display: flex;
+    align-items: center; /* Align content vertically */
+    justify-content: center; /* Align content horizontally */
+    width: 500px;
+    height: 500px;
+    border-radius: 50%; /* This makes it circular */
+    color: white;
+    font-size: 60px;
+    font-weight: bold;
+    align-self: center;
+}
+
+button:hover {
+    transform: scale(1.1); /* Scale the button slightly on hover */
+}
+
+#BehaivorContainer{
+    display: none;
+}
+#Start-Screen{
+    background-color: #ff9900;
+    padding: 10px;
+    width: 100%;
+    height: 100%;
+
+}
+#Options-Screen{
+    display: none;
+
+    background-color: rgb(184, 227, 255);
+    text-align: center;
+}
+#Grade-T-Btn{
+    background-color: rgb(96, 168, 115);
+}
+#Avg-Grade-Btn{
+    background-color: #3498db;
+}
+#T-T-Btn{
+    background-color: red;
+}
+#B-Btn{
+    background-color: rgb(168, 74, 149);
+}
+#GTableContainer{
+    display: none;
+}
+
+#gradesTable, #dayContainer {
+    border-collapse: collapse;
+    width: 100%;
+    display: none;
+}
+
+#gradesTable th,
+#gradesTable td 
+{
+    border: 1px solid #110000;
+    padding: 8px;
+    font: 1em sans-serif;
+    text-align: center;
+}
+
+#gradesTable th {
+    background-color: #cac8c8;
+}
+#instructions{
+    font-size: 2em;
+    
+}
+
+.search-container {
+    margin: 20px;
+    width: 50%;
+    text-align: right;
+    direction: rtl;
+}
+#searchInput {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    direction: rtl; /* Input text direction */
+}
+.item {
+    margin: 10px 0;
+    cursor: pointer;
+    text-align: right; /* Align item text to the right */
+}
+.item:hover {
+    background-color: #f0f0f0;
+}
+.item .semel {
+    font-weight: bold;
+    color: #555;
+}
