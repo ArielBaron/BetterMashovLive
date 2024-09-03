@@ -52,10 +52,21 @@
     let behaviorData = undefined
     let timetableByDay = undefined
     async function getData() {
-        gradesData = fetch('/grades')
-        behaviorData = fetch('/behavior')
-        timetableByDay = fetch('/timetable')
+    try {
+        const gradesResponse = await fetch('/grades');
+        const grades = await gradesResponse.json(); // Parse the JSON response
+        gradesData = grades.gradesData;       // Extract 'gradesData'
+        subjectGrades = grades.subjectGrades; // Extract 'subjectGrades'
+        const behaviorResponse = await fetch('/behavior');
+        behaviorData = await behaviorResponse.json();
+
+        const timetableResponse = await fetch('/timetable');
+        timetableByDay = await timetableResponse.json();
+    } catch (error) {
+        console.error('Error fetching data:', error);
     }
+}
+
 // handle the file upload and transfer unto home page
     document.getElementById('file-upload-form').addEventListener('submit', (event) => {
         event.preventDefault();
@@ -101,8 +112,8 @@
 
 
 // Pages and thier function
-function option_Menu(open=true){
-    document.getElementById("Options-Screen").style.display = open? "block" : "none"
+    function option_Menu(open=true){
+        document.getElementById("Options-Screen").style.display = open? "block" : "none"
     }
     
     function add_Back_btn(div) {
@@ -213,16 +224,16 @@ function option_Menu(open=true){
     function Avg_page() {
         option_Menu(false);
         
-        // Ensure SubjectGrades is defined
-        if (typeof SubjectGrades === 'undefined') {
-            console.error("SubjectGrades is not initialized yet.");
+        // Ensure subjectGrades is defined
+        if (typeof subjectGrades === 'undefined') {
+            console.error("subjectGrades is not initialized yet.");
             return;
         }
         
         const averageGrades = {};
         let c = 0;
-        for (const subjectName in SubjectGrades) {
-            const grades = SubjectGrades[subjectName];
+        for (const subjectName in subjectGrades) {
+            const grades = subjectGrades[subjectName];
             const sum = grades.reduce((acc, curr) => acc + curr, 0);
             const average = sum / grades.length;
             c+=average;
@@ -241,7 +252,7 @@ function option_Menu(open=true){
         const additionalCell1 = additionalRow.insertCell();
         additionalCell1.textContent = 'ממוצע כללי';
         const additionalCell2 = additionalRow.insertCell();
-        additionalCell2.textContent = c/Object.keys(SubjectGrades).length;
+        additionalCell2.textContent = c/Object.keys(subjectGrades).length;
         
         const tableContainer = document.getElementById('GTableContainer');
         tableContainer.innerHTML = ''; // Clear previous table

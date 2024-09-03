@@ -1,5 +1,9 @@
 const express = require('express');
 const path = require('path'); 
+// Funcs for fetching mashov data
+const fetchBehavior = require('./mashov/behavior');
+const fetchTimetable = require('./mashov/timetable');
+const fetchGrades = require('./mashov/grades')
 const app = express();
 const port = 3000;
 
@@ -71,7 +75,6 @@ app.get('/behavior', async (req, res) => {
   }
 });
 
-// Process and filter grades data
 app.get('/grades', async (req, res) => {
   try {
     if (!loginInfo) {
@@ -106,12 +109,14 @@ app.get('/grades', async (req, res) => {
       }
     });
 
-    res.json(subjectGrades);
+    // Combine both objects into one
+    res.json({ subjectGrades, gradesData: processedGrades });
   } catch (error) {
     console.error('Error fetching grades data:', error);
     res.status(500).json({ error: 'Failed to fetch grades data' });
   }
 });
+
 
 // Process and filter timetable data
 app.get('/timetable', async (req, res) => {

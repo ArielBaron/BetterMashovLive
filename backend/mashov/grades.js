@@ -6,7 +6,6 @@ const fetchGrades = async (credentials) => {
     try {
         const loginInfo = await mashov.loginToMashov(SEMEL, YEAR, ID, PASSWORD);
         const grades = await mashov.get(loginInfo, 'grades');
-        console.log(grades);
         return grades;
     } catch (error) {
         console.error('Error fetching grades data:', error);
