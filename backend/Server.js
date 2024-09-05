@@ -28,12 +28,16 @@ app.post('/submit', (req, res) => {
 
   // Save loginInfo to use in other endpoints
   loginInfo = credentials;
-
+  console.log(loginInfo)
   // Send success response
   res.json({ success: true, received: credentials });
 });
 
 
+app.get('/download', (req, res) => {
+  const filePath = path.join(__dirname, '../Assets', 'MashovData.json'); // Replace with your file path
+  res.download(filePath); // Download the file
+});
 
 
 // Process and filter behavior data

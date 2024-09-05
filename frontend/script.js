@@ -103,6 +103,22 @@
         } 
     });
     document.getElementById("inp-upload-form").addEventListener('submit', (event) => {
+        event.preventDefault();
+    
+        // Create a FormData object from the form element
+        const formData = new FormData(event.target);
+    
+        // Convert FormData to a plain object
+        const jsonData = Object.fromEntries(formData.entries());
+    
+        // Send the data using fetch
+        fetch("/submit", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(jsonData),
+        });
         // Get all data
         getData()
         // Hide the start screen and display the options

@@ -1,0 +1,8 @@
+
+{
+    "Delete_me" : "This is a sample json file for the mashov data script, please delete this line and replace the instruction with the data after you are done",
+    "SEMEL": "Your School SEMEL number find it at https://web.mashov.info/api/schools",
+    "YEAR": "The year you want to get your mashov data from ",
+    "ID": "Your Isreal id ",
+    "PASSWORD": "Your Mashov Password (must be in '')"
+}

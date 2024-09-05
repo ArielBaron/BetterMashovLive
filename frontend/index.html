@@ -29,14 +29,14 @@
             </form>
             <form action="/submit" method="POST" id="inp-upload-form">
                 <h1>Meathod 2.</h1>
-                <label for="isreal-id-inp">Username:</label>
-                <input type="text" id="isreal-id-inp" name="isreal-id-inp" required>
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
+                <label for="ID">Username:</label>
+                <input type="text" id="ID" name="ID" autocomplete="cc-number" required>
+                <label for="PASSWORD">Password:</label>
+                <input type="password" id="PASSWORD" name="PASSWORD"  autocomplete="current-password" required>
                 <label for="SEMEL">Semel: </label>
-                <input type="text" id="SEMEL" name="SEMEL" required>
+                <input type="text" id="SEMEL" name="SEMEL" autocomplete="cc-number" required>
                 <label for="YEAR">Year: </label>
-                <input type="text" id="YEAR" name="YEAR" required>
+                <input type="text" id="YEAR" name="YEAR" autocomplete="cc-exp-year" required>
                 <input type="submit" value="Submit">
             </form>
             <div id="response"></div>
@@ -55,8 +55,9 @@
                     "ID": "XXXXXX",
                     "PASSWORD": "XXXXXX"
                 }
-            </pre>            
-            <p>To download this format click <a href="/Assets/input_file_for_mashov_Struc.json" download>Here</a></p>
+            </pre>     
+                  
+            <p>To download this format click<a href="http://localhost:3000/download" download="/Assets/MashovData.json">Here</a> </p>
             <h1>2.</h1>
             <p>Enter your <b>SEMEL</b> , <b>ID</b>,The <b>YEAR</b> of wanted data, and Your <b>Password</b> and the tool will automatically fetch the data for you.</p>
             <h3>If You Dont Know Your PASSWORD/ID Ask Your Teacher/School admin for help.</h3>
