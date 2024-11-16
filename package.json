@@ -1,0 +1,25 @@
+{
+  "name": "bettermashovlive",
+  "version": "1.0.0",
+  "dependencies": {
+    "express": "latest"
+  },
+
+  "description": "This project is a website using mashov api that allows users to view and sort student grades And Behaviors based on various criteria such as date, grade, subject, and teacher.",
+  "main": "backend\\Server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArielBaron/BetterMashovLive.git"
+  },
+  "author": "Ariel Baron",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ArielBaron/BetterMashovLive/issues"
+  },
+  "homepage": "https://github.com/ArielBaron/BetterMashovLive#readme",
+  "scripts": {
+  "start": "node backend\\Server.js"
+}
+
+  
+}
