@@ -2,9 +2,9 @@
   "name": "bettermashovlive",
   "version": "1.0.0",
   "dependencies": {
-    "express": "latest"
+    "express": "latest",
+    "mashov-api": "^1.0.0"
   },
-
   "description": "This project is a website using mashov api that allows users to view and sort student grades And Behaviors based on various criteria such as date, grade, subject, and teacher.",
   "main": "backend\\Server.js",
   "repository": {
@@ -18,8 +18,6 @@
   },
   "homepage": "https://github.com/ArielBaron/BetterMashovLive#readme",
   "scripts": {
-  "start": "node backend\\Server.js"
-}
-
-  
+    "start": "node backend\\Server.js"
+  }
 }
