@@ -5,7 +5,7 @@ const fetchBehavior = require('./mashov/behavior');
 const fetchTimetable = require('./mashov/timetable');
 const fetchGrades = require('./mashov/grades')
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
