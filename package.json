@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/ArielBaron/BetterMashovLive#readme",
   "scripts": {
-    "start": "node backend\\Server.js"
+  "start": "node backend/Server.js"
   }
+
 }
