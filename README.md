@@ -18,5 +18,5 @@ All you need to do is simply run Server.js using node.
 in MashovData.json there is all of the steps to get the info needed for login
 
 # UPDATES:
-I now have a website <a href="bettermashovlive.onrender.com">BetterMashov</a>
+I now have a website <a href="https://bettermashovlive.onrender.com">BetterMashov</a>
 
