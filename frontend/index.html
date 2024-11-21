@@ -3,23 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Input Form</title>
+  <title>BetterMashov</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="GTableContainer"></div>
-    <div id="Options-Screen">
-        
-        <h1>Hello Your'e in System Please Pick Your Desigred Page:</h1>
-        <button onclick="Grades_page()" id="Grade-T-Btn" class="s-btn">לוח ציונים</button>
-        <button onclick="Avg_page()" id="Avg-Grade-Btn" class="s-btn">לוח ממומצע לכל ציון</button>
-        <button onclick="TimeTable_page()" id="T-T-Btn" class="s-btn">מערכת שעות</button>
-        <button onclick="Behavior_page()" id="B-Btn" class="s-btn">הערות התנהגות </button>
-    </div>
-    <div id="BehaivorContainer"></div>
-
+    
     <div id="Start-Screen">
         <div id="Login-div">
+            <a href="https://github.com/ArielBaron" target="_blank"><img src="https://pngimg.com/uploads/github/github_PNG80.png" class="logo" alt="my github"></a>
             <h1>Mashov Data Fetcher</h1>
             <h1>Meathod 1.</h1>
             <form  action="/submit-file" id="file-upload-form" method="POST">
@@ -56,8 +47,8 @@
                     "PASSWORD": "XXXXXX"
                 }
             </pre>     
-                  
-            <p>To download this format click<a href="http://localhost:3000/download" download="/Assets/MashovData.json">Here</a> </p>
+            
+            <p>To download this format click<a download="/Assets/MashovData.json">Here</a> </p>
             <h1>2.</h1>
             <p>Enter your <b>SEMEL</b> , <b>ID</b>,The <b>YEAR</b> of wanted data, and Your <b>Password</b> and the tool will automatically fetch the data for you.</p>
             <h3>If You Dont Know Your PASSWORD/ID Ask Your Teacher/School admin for help.</h3>
@@ -70,7 +61,15 @@
             </h3>
         </div>
     </div>
-
+    <div id="GTableContainer"></div>
+    <div id="Options-Screen">
+        <h1>Hello Your'e in System Please Pick Your Desigred Page:</h1>
+        <button onclick="Grades_page()" id="Grade-T-Btn" class="s-btn">לוח ציונים</button>
+        <button onclick="Avg_page()" id="Avg-Grade-Btn" class="s-btn">לוח ממומצע לכל ציון</button>
+        <button onclick="TimeTable_page()" id="T-T-Btn" class="s-btn">מערכת שעות</button>
+        <button onclick="Behavior_page()" id="B-Btn" class="s-btn">הערות התנהגות </button>
+    </div>
+    <div id="BehaivorContainer"></div>
     <script src="script.js"></script>
 </body>
 </html>

@@ -1,7 +1,11 @@
 #Info-div{
     font-size: 1.5em;
 }
-
+.logo{
+    float: right;
+    width: 100px;
+    height: 100px;
+}
 .s-btn {
     width: 300px;
     height: 300px;
