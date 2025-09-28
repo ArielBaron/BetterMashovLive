@@ -1,15 +1,14 @@
 const express = require('express');
-const path = require('path'); 
-// Funcs for fetching mashov data
+const path = require('path');
 const fetchBehavior = require('./mashov/behavior');
 const fetchTimetable = require('./mashov/timetable');
-const fetchGrades = require('./mashov/grades')
+const fetchGrades = require('./mashov/grades');
+
 const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/index.html'));
@@ -19,41 +18,26 @@ app.use(express.static(path.join(__dirname, '../frontend')));
 
 let loginInfo = null;
 
-
-
 // Handle form submission
 app.post('/submit', (req, res) => {
-  // Directly use req.body without parsing
-  const credentials = req.body;
-
-  // Save loginInfo to use in other endpoints
-  loginInfo = credentials;
-  console.log(loginInfo)
-  // Send success response
-  res.json({ success: true, received: credentials });
+  loginInfo = req.body;
+  console.log("Received credentials:", loginInfo);
+  res.json({ success: true, received: loginInfo });
 });
 
-
+// Download endpoint
 app.get('/download', (req, res) => {
-  const filePath = path.join(__dirname, '../Assets', 'MashovData.json'); // Replace with your file path
-  res.download(filePath); // Download the file
+  const filePath = path.join(__dirname, '../Assets', 'MashovData.json');
+  res.download(filePath);
 });
 
-
-// Process and filter behavior data
+// Behavior endpoint
 app.get('/behavior', async (req, res) => {
   try {
-    if (!loginInfo) {
-      return res.status(400).json({ error: 'Not logged in to Mashov' });
-    }
-
+    if (!loginInfo) return res.status(400).json({ error: 'Not logged in to Mashov' });
     const behavior = await fetchBehavior(loginInfo);
-
-    // Process the behavior data
     const processedBehavior = behavior.map(obj => {
-      if (obj.achvaName !== "נוכחות בשיעור מקוון") {
-        delete obj.timestamp;
-      }
+      if (obj.achvaName !== "נוכחות בשיעור מקוון") delete obj.timestamp;
       delete obj.reporterGuid;
       delete obj.lessonId;
       delete obj.achvaCode;
@@ -65,13 +49,10 @@ app.get('/behavior', async (req, res) => {
       delete obj.lessonReporter;
       obj.justified = obj.justified === 9 ? "מוצדק" : "לא מוצדק";
       delete obj.groupId;
-
-      // Format lesson date
       const lessonDate = new Date(obj.lessonDate).toISOString().split('T')[0];
       obj.lessonDate = lessonDate.split("-").reverse().join("-");
       return obj;
     });
-
     res.json(processedBehavior);
   } catch (error) {
     console.error('Error fetching behavior data:', error);
@@ -79,15 +60,11 @@ app.get('/behavior', async (req, res) => {
   }
 });
 
+// Grades endpoint
 app.get('/grades', async (req, res) => {
   try {
-    if (!loginInfo) {
-      return res.status(400).json({ error: 'Not logged in to Mashov' });
-    }
-
+    if (!loginInfo) return res.status(400).json({ error: 'Not logged in to Mashov' });
     const grades = await fetchGrades(loginInfo);
-
-    // Process the grades data
     const processedGrades = grades.map(obj => {
       delete obj.groupId;
       delete obj.gradingPeriod;
@@ -101,19 +78,13 @@ app.get('/grades', async (req, res) => {
       return obj;
     });
 
-    // Structure grades by subject
     const subjectGrades = {};
     processedGrades.forEach(entry => {
       const { subjectName, grade } = entry;
-
-      if (subjectGrades[subjectName]) {
-        subjectGrades[subjectName].push(grade);
-      } else {
-        subjectGrades[subjectName] = [grade];
-      }
+      if (subjectGrades[subjectName]) subjectGrades[subjectName].push(grade);
+      else subjectGrades[subjectName] = [grade];
     });
 
-    // Combine both objects into one
     res.json({ subjectGrades, gradesData: processedGrades });
   } catch (error) {
     console.error('Error fetching grades data:', error);
@@ -121,45 +92,32 @@ app.get('/grades', async (req, res) => {
   }
 });
 
-
-// Process and filter timetable data
+// Timetable endpoint
 app.get('/timetable', async (req, res) => {
   try {
-    if (!loginInfo) {
-      return res.status(400).json({ error: 'Not logged in to Mashov' });
-    }
-
+    if (!loginInfo) return res.status(400).json({ error: 'Not logged in to Mashov' });
     const timetable = await fetchTimetable(loginInfo);
-
-    // Process the timetable data
     const processedTimetable = timetable.map(obj => {
       delete obj.groupDetails.groupInactiveTeachers;
       delete obj.groupDetails.groupId;
       delete obj.groupDetails.subjectName;
-
       const { day, lesson } = obj.timeTable;
       obj.groupDetails.day = day;
       obj.groupDetails.lesson = lesson;
       delete obj.timeTable;
-
-      const teacherNames = obj.groupDetails.groupTeachers.map(teacher => teacher.teacherName);
+      const teacherNames = obj.groupDetails.groupTeachers.map(t => t.teacherName);
       obj.groupDetails.teacherName = teacherNames.join(", ");
       delete obj.groupDetails.groupTeachers;
-
       return obj;
     });
 
-    // Split timetableData into sublists based on the day property
     const timetableByDay = {};
     processedTimetable.forEach(obj => {
       const { day, ...rest } = obj.groupDetails;
-      if (!timetableByDay[day]) {
-        timetableByDay[day] = [];
-      }
+      if (!timetableByDay[day]) timetableByDay[day] = [];
       timetableByDay[day].push(rest);
     });
 
-    // Sort by lesson
     for (const day in timetableByDay) {
       timetableByDay[day].sort((a, b) => a.lesson - b.lesson);
     }
@@ -171,7 +129,5 @@ app.get('/timetable', async (req, res) => {
   }
 });
 
-// Start the server
-app.listen(port, () => {
-  console.log(`Server is running at http://localhost:${port}`);
-});
+// Start server
+app.listen(port, () => console.log(`Server running at http://localhost:${port}`));
