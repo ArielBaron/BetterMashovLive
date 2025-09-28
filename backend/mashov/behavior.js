@@ -1,9 +1,10 @@
 const mashov = require('mashov-api');
 
 const fetchBehavior = async (credentials) => {
-    const { SEMEL, YEAR, userId, PASSWORD } = credentials;
+    const { SEMEL, YEAR, username, PASSWORD } = credentials;
     try {
-        const loginInfo = await mashov.loginToMashov(SEMEL, YEAR, userId, PASSWORD);
+        const loginArray = await mashov.loginToMashov(SEMEL, YEAR, username, PASSWORD);
+        const loginInfo = loginArray[0]; // first element required by mashov.get
         const behavior = await mashov.get(loginInfo, 'behave');
         return behavior;
     } catch (error) {
