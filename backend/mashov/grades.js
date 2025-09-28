@@ -1,10 +1,9 @@
 const mashov = require('mashov-api');
-const fs = require('fs');
 
 const fetchGrades = async (credentials) => {
-    const { SEMEL, YEAR, ID, PASSWORD } = credentials;
+    const { SEMEL, YEAR, userId, PASSWORD } = credentials;
     try {
-        const loginInfo = await mashov.loginToMashov(SEMEL, YEAR, ID, PASSWORD);
+        const loginInfo = await mashov.loginToMashov(SEMEL, YEAR, userId, PASSWORD);
         const grades = await mashov.get(loginInfo, 'grades');
         return grades;
     } catch (error) {
